@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>处理中</title>
+    <script>
+        window.onload = function() {
+            const taskId = "{{ task_id }}";
+            const progressUrl = `/progress/${taskId}/`;
+
+            const checkStatus = function() {
+                fetch(progressUrl)
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.status === 'success') {
+                            window.location.href = `/result/${taskId}/`;
+                        } else if (data.status === 'failed') {
+                            alert('处理失败: ' + data.error);
+                        } else {
+                            console.log('处理进度: ', data.progress);
+                            setTimeout(checkStatus, 2000); // 每 2 秒检查一次
+                        }
+                    })
+                    .catch(error => {
+                        console.error('检查状态时出错:', error);
+                    });
+            };
+
+            checkStatus();
+        };
+    </script>
+</head>
+<body>
+    <h1>正在处理文件...</h1>
+    <p>任务 ID: {{ task_id }}</p>
+    <p>示例数据: {{ sample_data }}</p>
+</body>
+</html>

@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>药物作用机理预测平台</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Arial, sans-serif;
+        }
+
+        /* 顶部标题 */
+        header {
+            background: #2c3e50;
+            color: white;
+            padding: 1.5rem;
+            text-align: center;
+            font-size: 2rem;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        /* 主体布局 */
+        .container {
+            display: flex;
+            min-height: 100vh;
+            padding: 20px;
+            gap: 20px;
+            background: #f5f6fa;
+        }
+
+        /* 左侧功能说明 */
+        .left-panel {
+            flex: 1;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        /* 中间图文区域 */
+        .center-panel {
+            flex: 2;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        /* 右侧上传区域 */
+        .right-panel {
+            flex: 1;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        /* 图片网格布局 */
+        .image-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .image-item {
+            border: 1px solid #ddd;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        .image-item img {
+            width: 100%;
+            height: 200px;
+            object-fit:contain;
+            border-radius: 3px;
+        }
+
+        /* 文件上传样式 */
+        .upload-box {
+            border: 2px dashed #3498db;
+            padding: 2rem;
+            text-align: center;
+            margin-top: 20px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .upload-box:hover {
+            background: #f0f8ff;
+        }
+
+        #file-input {
+            display: none;
+        }
+
+        #process-btn {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 15px;
+            width: 100%;
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        药物作用机理预测系统
+    </header>
+
+    <div class="container">
+        <!-- 左侧功能说明 -->
+        <div class="left-panel">
+            <h2>功能说明</h2>
+            <ul style="margin-top: 15px; line-height: 1.6; list-style: none;">
+                <li>✅ 支持XLS/CSV文件格式</li>
+                <li>🔥 批量处理功能，可一次对多个药物进行预测</li>
+            </ul>
+        </div>
+
+        <!-- 中间图文区域 -->
+        <div class="center-panel">
+            <h3>分析过程</h3>
+            <div class="image-grid">
+                <div class="image-item">
+                   <img src="{% static '/1.png' %}" alt="result 1">
+                    <p style="margin-top: 8px;">模型选择</p>
+                </div>
+                <div class="image-item">
+                  <img src="{% static '/2.png' %}" alt="result 2">
+                    <p style="margin-top: 8px;">数据处理</p>
+                </div>
+                <div class="image-item">
+                  <img src="{% static '/3.png' %}" alt="result 3">
+                    <p style="margin-top: 8px;">数据上传</p>
+                </div>
+                <div class="image-item">
+                <img src="{% static '/4.png' %}" alt="result 4">
+                    <p style="margin-top: 8px;">结果预测</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 右侧上传区域 -->
+        <div class="right-panel">
+            <h3>文件上传</h3>
+            <div class="upload-box" onclick="document.getElementById('file-input').click()">
+                <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form.as_p }}
+           <button type="submit" class="btn btn-primary">上传并处理</button>
+            </form>
+            </div>
+
+            <!-- 处理结果展示区 -->
+            <div id="result-area" style="margin-top: 20px; display: none;">
+                <h4>处理进度</h4>
+                <div style="background: #eee; height: 4px; border-radius: 2px;">
+                    <!-- <div style="width: 30%; background: #3498db; height: 100%;"></div> -->
+                </div>
+                <!-- <p style="margin-top: 10px;">预计剩余时间：2分15秒</p> -->
+            </div>
+        </div>
+    </div>
+
+
+        </div>
+    </div>
+
+    <script>
+        // 交互示例
+        document.getElementById('file-input').addEventListener('change', function(e) {
+            const fileName = e.target.files[0]?.name || '未选择文件';
+            document.querySelector('.upload-box p').textContent = fileName;
+            document.getElementById('result-area').style.display = 'block';
+        });
+
+        document.getElementById('process-btn').addEventListener('click', function() {
+            alert('分析已开始，请稍候...');
+        });
+    </script>
+</body>
+</html>

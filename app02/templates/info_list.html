@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h1>Info List</h1>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Password</th>
+                <th>Prior</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for info in Info_list %}
+                <tr>
+                    <td>{{ info.id }}</td>
+                    <td>{{ info.name }}</td>
+                    <td>{{ info.email }}</td>
+                    <td>{{ info.password }}</td>
+                    <td>{{ info.prior }}</td>
+                    <td>
+                        <a href="/info_delete/?nid={{ info.id }}" >Delete</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

@@ -1,0 +1,82 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Model Showcase</title>
+    <style>
+        .model-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            margin: 20px;
+        }
+        .model-card {
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 10px;
+            width: 300px;
+            text-align: center;
+        }
+        .model-card img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+        .model-card h3 {
+            margin: 10px 0;
+        }
+        .model-card p {
+            margin: 5px 0;
+        }
+        .model-card a {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 5px 10px;
+            background-color: #007BFF;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        .model-card a:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h1>Model Showcase</h1>
+    <div class="model-container">
+        <!-- Model 1 -->
+        <div class="model-card">
+            {% load static %}
+            <h3>Model 1</h3>
+            <img src="{% static '/model1.png' %}" alt="Model 1">
+            <p>Performance: 95% Accuracy</p>
+            <p>Description: This model is a hybrid model for detecting drug classification, and it has strong robustness.</p>
+            <a href="/upload_excel2">Use Model</a>
+        </div>
+
+        <!-- Model 2 -->
+        <div class="model-card">
+            {% load static %}
+            <h3>Model 2</h3>
+            <img src="{% static '/model2.png' %}" alt="Model 2">
+            <p>Performance: 92% Accuracy</p>
+            <p>Description: This model is designed for accurate detection of drug classification.</p>
+            <a href="/upload_excel2">Use Model</a>
+        </div>
+
+        <!-- Model 3 -->
+        <div class="model-card">
+            {% load static %}
+            <h3>Model 3</h3>
+            <img src="{% static '/model3.png' %}" alt="Model 3">
+            <p>Performance: 90% Accuracy</p>
+            <p>Description: This model is designed for the rapid detection and classification of pharmaceuticals.</p>
+            <a href="/upload_excel2">Use Model</a>
+        </div>
+    </div>
+</body>
+</html>
